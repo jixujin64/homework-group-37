@@ -16,7 +16,7 @@ SM3是一种密码哈希函数，MD结构，长度小于2^64bit的消息,消息�
 |16|35.397023s|92402|
 
 ## 运行截图
-![image](https://github.com/jixujin64/homework-group-37/blob/main/project_1/8bit.png "8bit运行截图")
-
+![image](https://github.com/jixujin64/homework-group-37/blob/main/project_1/8bit.png "8bit运行截图")<br>
+![image](https://github.com/jixujin64/homework-group-37/blob/main/project_1/16bit.png?raw=true "16bit运行截图")
 
 
