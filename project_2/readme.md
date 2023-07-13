@@ -7,6 +7,9 @@
 SM3的rho攻击是一种与朴素生日攻击不同的攻击方式，它利用了SM3哈希函数中的rho变换特性来构造碰撞。
 ## 实现效果
 8bit：<br>
+![inage](https://github.com/jixujin64/homework-group-37/blob/main/project_2/8bits.png?raw=true)
+
+16bit:<br>
 
 
 
