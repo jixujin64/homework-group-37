@@ -21,23 +21,23 @@ void collisionAttack( int hashSize)
     int i = 0;
     while (true) {
         i++;
-        // Éú³ÉËæ»úÏûÏ¢
-        cout << "Ì½Ë÷" << i << endl;
+        // ç”Ÿæˆéšæœºæ¶ˆæ¯
+        cout << "æ¢ç´¢" << i << endl;
         prng.GenerateBlock(msg1, hashSize);
         prng.GenerateBlock(msg2, hashSize);
 
-        // ¼ÆËã¹şÏ£Öµ
+        // è®¡ç®—å“ˆå¸Œå€¼
         byte hash1[32], hash2[32];
         sm3.CalculateDigest(hash1, msg1, hashSize);
         sm3.CalculateDigest(hash2, msg2, hashSize);
 
-        // ¼ì²é¹şÏ£Åö×²
+        // æ£€æŸ¥å“ˆå¸Œç¢°æ’
         if (memcmp(hash1, hash2, hashSize) == 0){
             break;
         }
     }
 
-    // Êä³öÅö×²½á¹û
+    // è¾“å‡ºç¢°æ’ç»“æœ
     std::cout << "Message 1: ";
     StringSource(msg1, hashSize, true, new HexEncoder(new FileSink(std::cout)));
     std::cout << std::endl;
@@ -52,7 +52,7 @@ void collisionAttack( int hashSize)
 
 int main()
 {
-    int hashSize = 1; // ÉèÖÃ¹şÏ£Öµ´óĞ¡
+    int hashSize = 1; // è®¾ç½®å“ˆå¸Œå€¼å¤§å°
     LARGE_INTEGER t1, t2, tc;
     QueryPerformanceFrequency(&tc);
     QueryPerformanceCounter(&t1);
