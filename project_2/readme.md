@@ -11,5 +11,9 @@ SM3的rho攻击是一种与朴素生日攻击不同的攻击方式，它利用�
 
 16bit:<br>
 
+![image](https://github.com/jixujin64/homework-group-37/blob/main/project_2/16bits.png?raw=true)
+
+32bie: <br>
+![image]()
 
 
