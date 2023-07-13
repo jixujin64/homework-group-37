@@ -1,7 +1,0 @@
-# *Project1: implement the naïve birthday attack of reduced SM3
-## 实现方式：使用cryptopp库，在
-## 效果：
-## 实现环境
-### 软件环境：vs2022
-### 硬件环境:处理器	11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz   2.61 GHz 机带 RAM	16.0 GB (15.7 GB 可用)
-
