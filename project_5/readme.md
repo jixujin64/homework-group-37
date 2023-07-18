@@ -20,9 +20,34 @@ Merkle树的叶子是数据块(例如，文件或者文件的集合)的hash值�
 通过比较根节点的哈希值，可以快速判断数据集是否被篡改。如果根节点的哈希值与预期的哈希值不一致，那么数据集可能已被篡改。
 从根节点开始，根据节点哈希值和目标哈希值的比较，沿着树的路径向下移动，直到找到目标节点或到达叶子节点。
 ##### ③ 插入和删除
+
 ## 2.代码实现
-①定义结构体：创建一个结构体来表示默克尔树的节点。节点应包括一个指向左子节点和右子节点的指针，以及一个保存哈希值的变量。
-## 3.参考资料
+①定义结构体：创建一个结构体来表示默克尔树的节点。节点应包括一个指向左子节点和右子节点的指针，以及一个保存哈希值的变量。以及还有一个表示树的结构体<br>
+<img width="336" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/2fc47007-2372-4542-bf17-1c3754b2243a">
+<br>
+②哈希函数使用sha256，直接调用cryptopp库里的函数<br>
+<img width="369" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/d8365080-706c-4ac5-8904-9299d0d653be"><br>
+③创建树<br>
+<img width="423" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/bfccdfa1-3058-490f-a1f9-f84c32d551ff">  <br>
+④插入结点<br>
+<img width="335" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/3f787cd8-1be5-4186-af62-0e9bcbcf1693"><br>
+⑤删除结点<br>
+<img width="380" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/44d8566f-509e-40a8-bb67-2242a6567105"><br>
+⑥更新结点<br>
+<img width="313" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/c20aa3c0-beb9-412f-a469-0e4692634614"><br>
+⑦检索结点<br>
+<img width="371" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/d1f0b29f-542d-40b8-b07c-00928503179d"><br>
+## 3.实验环境
+##### 软件环境：
+vs 2022
+##### 硬件环境：
+处理器	11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz   2.61 GHz   机带 RAM	16.0 GB (15.7 GB 可用)
+
+## 4.效果：
+叶子数据：char* leaves[] = {"abcd","acdew","yuhgdcd"，"576vdsj","cdsieydjk","e8hcdjsk","scidsozcerz","12738dsj","jinjixu123","202100150107","jjiuhb887","ji9jwk8"};<br>
+<img width="824" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/b66cff1e-a897-433c-98fa-c544e3e2f853">
+
+## 5.参考资料
 [1] https://en.wikipedia.org/wiki/Merkle_tree<br>
 [2] Merkle Tree学习: https://www.cnblogs.com/fengzhiwu/p/5524324.html<br>
 [3] https://www.rfc-editor.org/rfc/rfc6962<br>
