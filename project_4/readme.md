@@ -22,6 +22,9 @@ SIMD（Single Instruction, Multiple Data单指令多数据）指令集是一种�
 在使用SIMD指令优化SM3算法时，可以将数据分成多个块，每个块的大小为SIMD指令集支持的数据元素的个数。然后，对每个数据块使用SIMD指令进行并行计算，最后将计算结果合并得到最终的结果。
 ### 效果
 未优化：<br>
+<img width="541" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/c5e39727-a99e-4e82-bedf-14ac921a2085">
+
+多线程：<br>
 <img width="606" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/84ed9c64-c926-4c6d-8b6e-6adf552a7d6c">
 
 ## 参考资料：
