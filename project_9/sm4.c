@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <windows.h>
 #define u8 unsigned char
 #define u32 unsigned long
 
@@ -21,7 +22,7 @@ const u8 Sbox[256] = {
 	0x89,0x69,0x97,0x4a,0x0c,0x96,0x77,0x7e,0x65,0xb9,0xf1,0x09,0xc5,0x6e,0xc6,0x84,
 	0x18,0xf0,0x7d,0xec,0x3a,0xdc,0x4d,0x20,0x79,0xee,0x5f,0x3e,0xd7,0xcb,0x39,0x48
 };
-	
+
 // 密钥扩展算法的常数FK 
 const u32 FK[4] = {
 	0xa3b1bac6, 0x56aa3350, 0x677d9197, 0xb27022dc
@@ -51,12 +52,12 @@ void iterate32(u32 X[], u32 RK[]); // 迭代算法
 void reverse(u32 X[], u32 Y[]); // 反转函数 
 void encryptSM4(u32 X[], u32 RK[], u32 Y[]); // 加密算法
 void decryptSM4(u32 X[], u32 RK[], u32 Y[]); // 解密算法
- 
+
 /*
-	查S盒的函数B 
+	查S盒的函数B
 	参数:	u32 b
 	返回值:	查S盒的结果u32 b
-*/ 
+*/
 u32 functionB(u32 b) {
 	u8 a[4];
 	short i;
@@ -71,29 +72,29 @@ u32 functionB(u32 b) {
 /*
 	循环左移算法
 	参数：	u32 a    length：循环左移位数
-	返回值：u32 b 
+	返回值：u32 b
 */
 u32 loopLeft(u32 a, short length) {
 	short i;
-	for(i = 0; i < length; i++) {
+	for (i = 0; i < length; i++) {
 		a = a * 2 + a / 0x80000000;
 	}
 	return a;
 }
 
-/* 
+/*
 	密钥线性变换函数L
 	参数：	u32 a
-	返回值：线性变换后的u32 a	
+	返回值：线性变换后的u32 a
 */
 u32 functionL1(u32 a) {
 	return a ^ loopLeft(a, 2) ^ loopLeft(a, 10) ^ loopLeft(a, 18) ^ loopLeft(a, 24);
 }
 
-/* 
+/*
 	密钥线性变换函数L'
 	参数：	u32 a
-	返回值：移位操作后的u32 a	
+	返回值：移位操作后的u32 a
 */
 u32 functionL2(u32 a) {
 	return a ^ loopLeft(a, 13) ^ loopLeft(a, 23);
@@ -101,43 +102,43 @@ u32 functionL2(u32 a) {
 
 /*
 	合成变换T
-	参数：	u32 a    short mode：1表示明文的T，调用L；2表示密钥的T，调用L' 
-	返回值：合成变换后的u32 a 
+	参数：	u32 a    short mode：1表示明文的T，调用L；2表示密钥的T，调用L'
+	返回值：合成变换后的u32 a
 */
 u32 functionT(u32 a, short mode) {
 	return mode == 1 ? functionL1(functionB(a)) : functionL2(functionB(a));
 }
- 
-/* 
+
+/*
 	密钥扩展算法第一步
-	参数：	MK[4]：密钥  K[4]:中间数据，保存结果	（FK[4]：常数） 
-	返回值：无 
-*/ 
+	参数：	MK[4]：密钥  K[4]:中间数据，保存结果	（FK[4]：常数）
+	返回值：无
+*/
 void extendFirst(u32 MK[], u32 K[]) {
 	int i;
-	for(i = 0; i < 4; i++) {
-		K[i] = MK[i] ^ FK[i]; 
-	} 
-}
-
-/* 
-	密钥扩展算法第二步
-	参数：	RK[32]：轮密钥，保存结果    K[4]：中间数据 （CK[32]：固定参数） 
-	返回值：无
-*/ 
-void extendSecond(u32 RK[], u32 K[]) {
-	short i;
-	for(i = 0; i <32; i++) {
-		K[(i+4)%4] = K[i%4] ^ functionT(K[(i+1)%4] ^ K[(i+2)%4] ^ K[(i+3)%4] ^ CK[i], 2);
-		RK[i] = K[(i+4)%4];
-	} 
+	for (i = 0; i < 4; i++) {
+		K[i] = MK[i] ^ FK[i];
+	}
 }
 
 /*
-	密钥扩展算法 
-	参数：	MK[4]：密钥     K[4]：中间数据    RK[32]：轮密钥，保存结果 
-	返回值：无 
-*/ 
+	密钥扩展算法第二步
+	参数：	RK[32]：轮密钥，保存结果    K[4]：中间数据 （CK[32]：固定参数）
+	返回值：无
+*/
+void extendSecond(u32 RK[], u32 K[]) {
+	short i;
+	for (i = 0; i < 32; i++) {
+		K[(i + 4) % 4] = K[i % 4] ^ functionT(K[(i + 1) % 4] ^ K[(i + 2) % 4] ^ K[(i + 3) % 4] ^ CK[i], 2);
+		RK[i] = K[(i + 4) % 4];
+	}
+}
+
+/*
+	密钥扩展算法
+	参数：	MK[4]：密钥     K[4]：中间数据    RK[32]：轮密钥，保存结果
+	返回值：无
+*/
 void getRK(u32 MK[], u32 K[], u32 RK[]) {
 	extendFirst(MK, K);
 	extendSecond(RK, K);
@@ -146,57 +147,57 @@ void getRK(u32 MK[], u32 K[], u32 RK[]) {
 /*
 	迭代32次
 	参数：	u32 X[4]：迭代对象，保存结果    u32 RK[32]：轮密钥
-	返回值：无	  
+	返回值：无
 */
 void iterate32(u32 X[], u32 RK[]) {
 	short i;
-	for(i = 0; i < 32; i++) {
-		X[(i+4)%4] = X[i%4] ^ functionT(X[(i+1)%4] ^ X[(i+2)%4] ^ X[(i+3)%4] ^ RK[i], 1);
+	for (i = 0; i < 32; i++) {
+		X[(i + 4) % 4] = X[i % 4] ^ functionT(X[(i + 1) % 4] ^ X[(i + 2) % 4] ^ X[(i + 3) % 4] ^ RK[i], 1);
 	}
 }
 
 /*
-	反转函数 
+	反转函数
 	参数；	u32 X[4]：反转对象    u32 Y[4]：反转结果
-	返回值：无 
+	返回值：无
 */
 void reverse(u32 X[], u32 Y[]) {
-	 short i;
-	 for(i = 0; i < 4; i++){
-	 	Y[i] = X[4 - 1 - i];
-	 } 
-} 
+	short i;
+	for (i = 0; i < 4; i++) {
+		Y[i] = X[4 - 1 - i];
+	}
+}
 
 /*
 	加密算法
-	参数：	u32 X[4]：明文    u32 RK[32]：轮密钥    u32 Y[4]：密文，保存结果 
-	返回值：无 
+	参数：	u32 X[4]：明文    u32 RK[32]：轮密钥    u32 Y[4]：密文，保存结果
+	返回值：无
 */
 void encryptSM4(u32 X[], u32 RK[], u32 Y[]) {
 	iterate32(X, RK);
 	reverse(X, Y);
-} 
+}
 
 /*
 	解密算法
 	参数： 	u32 X[4]：密文    u32 RK[32]：轮密钥    u32 Y[4]：明文，保存结果
-	返回值：无 
+	返回值：无
 */
 void decryptSM4(u32 X[], u32 RK[], u32 Y[]) {
 	short i;
 	u32 reverseRK[32];
-	for(i = 0; i < 32; i++) {
-		reverseRK[i] = RK[32-1-i];
+	for (i = 0; i < 32; i++) {
+		reverseRK[i] = RK[32 - 1 - i];
 	}
 	iterate32(X, reverseRK);
 	reverse(X, Y);
 }
- 
+
 /*
 	测试数据：
 	明文：	01234567 89abcdef fedcba98 76543210
 	密钥：	01234567 89abcdef fedcba98 76543210
-	密文：	681edf34 d206965e 86b3e94f 536e4246 
+	密文：	681edf34 d206965e 86b3e94f 536e4246
 */
 int main(void) {
 	u32 X[4]; // 明文 
@@ -205,21 +206,27 @@ int main(void) {
 	u32 K[4]; // 中间数据 
 	u32 Y[4]; // 密文 
 	short i; // 临时变量 
-	printf("明文："); 
-	scanf("%8x%8x%8x%8x", &X[0], &X[1], &X[2], &X[3]);
-	printf("密钥："); 
-	scanf("%8x%8x%8x%8x", &MK[0], &MK[1], &MK[2], &MK[3]);
-	printf("**************生成轮密钥*****************\n"); 
+	printf("明文：");
+	scanf_s("%8x%8x%8x%8x", &X[0], &X[1], &X[2], &X[3]);
+	printf("密钥：");
+	LARGE_INTEGER t1, t2, tc;
+	QueryPerformanceFrequency(&tc);
+	QueryPerformanceCounter(&t1);
+	scanf_s("%8x%8x%8x%8x", &MK[0], &MK[1], &MK[2], &MK[3]);
+	printf("**************生成轮密钥*****************\n");
 	getRK(MK, K, RK);
-	for(i = 0; i < 32; i++) {
+	for (i = 0; i < 32; i++) {
 		printf("[%2d]：%08x    ", i, RK[i]);
-		if(i%4 == 3)	printf("\n"); 
+		if (i % 4 == 3)	printf("\n");
 	}
-	printf("************** 生成密文 *****************\n"); 
+	printf("************** 生成密文 *****************\n");
 	encryptSM4(X, RK, Y);
 	printf("%08x %08x %08x %08x\n", Y[0], Y[1], Y[2], Y[3]);
-	printf("************** 生成明文 *****************\n");  
+	printf("************** 生成明文 *****************\n");
 	decryptSM4(Y, RK, X);
 	printf("%08x %08x %08x %08x\n", X[0], X[1], X[2], X[3]);
-	return 0;	
-} 
+	QueryPerformanceCounter(&t2);
+	double time = (double)(t2.QuadPart - t1.QuadPart) / (double)tc.QuadPart;
+	printf("%fs", time);
+	return 0;
+}
