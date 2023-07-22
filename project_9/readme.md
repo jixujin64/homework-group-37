@@ -23,7 +23,25 @@
 <img width="252" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/a6c620b5-cebe-42c2-9d49-595dc6272efa">
 
 ## SM4的软件实现
+SM4加解密过程主要包括以下步骤：
+
+密钥扩展：将128位的密钥扩展为32个轮密钥。通过密钥扩展算法，根据初始密钥计算出每一轮需要使用的子密钥。
+
+加密过程：
+a. 初始置换：将输入的128位数据按照一定规则进行初步的置换操作。
+
+b. 轮函数迭代：对初始置换后的数据进行32轮的迭代处理。每一轮包括四个基本操作：字节替代（Substitution）、行移位（Shift Rows）、列混淆（Mix Columns）和轮密钥加（Add Round Key）。
+
+c. 末尾置换：在最后一轮迭代结束后，对数据进行末尾置换操作。
+
+解密过程：
+
+a. 加密和解密使用相同的轮密钥，但使用顺序相反。
+
+b. 解密过程与加密过程类似，只是在轮密钥的使用顺序上有所调整。
+
 运行效果：
+
 <img width="491" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/24e33afb-f3e4-439b-8017-6c854f204217">
 
 
