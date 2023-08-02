@@ -24,8 +24,10 @@ SM2是一种国家商用密码算法，基于椭圆曲线密码体制(ECDSA)。R
 ## 实现效果：
 <img width="407" alt="image" src="https://github.com/jixujin64/homework-group-37/assets/139337238/0f1b2e41-d059-4bde-9a24-cdc276486621">
 
+runtime：0.613802433013916 s
+
 ## 参考资料:
 [1] https://www.rfc-editor.org/rfc/rfc6979
 
-runtime：0.613802433013916 s
+
 
