@@ -3,7 +3,7 @@ import hmac
 
 
 def hash256(s):
-    '''two rounds of sha256'''
+    '''2轮sha256'''
     return hashlib.sha256(hashlib.sha256(s).digest()).digest()
 
 class FieldElement:
