@@ -4,6 +4,9 @@
 
 ## 运行环境
 
+软件环境：python
+
+硬件环境： 处理器 11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz 2.61 GHz 机带 RAM 16.0 GB (15.7 GB 可用)
 
 ## 运行效果
 **服务器：**
