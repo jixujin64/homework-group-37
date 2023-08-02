@@ -2,8 +2,7 @@
 ## 实现原理：
 ![image](https://github.com/jixujin64/homework-group-37/assets/139337238/ef11e20c-47f5-48c6-84be-da1fb5c5839f)
 
-## 实现环境
-软件环境：python
+
 
 # *Project15: implement sm2 2P sign with real network communication
 ## 实现原理：
