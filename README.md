@@ -8,14 +8,14 @@
 - [x] *Project3: implement length extension attack for SM3, SHA256, etc.<br>
 - [x] *Project4: do your best to optimize SM3 implementation (software)<br>
 - [x] *Project5: Impl Merkle Tree following RFC6962<br>
-- [x] *Project6: impl this protocol with actual network communication<br>
-- [x] *Project7: Try to Implement this scheme<br>
+- [ ] *Project6: impl this protocol with actual network communication<br>
+- [ ] *Project7: Try to Implement this scheme<br>
 - [x] *Project8: AES impl with ARM instruction<br>
 - [x] *Project9: AES / SM4 software implementation<br>
 - [x] *Project10: report on the application of this deduce technique in Ethereum with ECDSA<br>
 - [x] *Project11: impl sm2 with RFC6979<br>
-- [x] *Project12: verify the above pitfalls with proof-of-concept code<br>
-- [x] *Project13: Implement the above ECMH scheme<br>
+- [ ] *Project12: verify the above pitfalls with proof-of-concept code<br>
+- [ ] *Project13: Implement the above ECMH scheme<br>
 - [x] *Project14: Implement a PGP scheme with SM2<br>
 - [x] *Project15: implement sm2 2P sign with real network communication<br>
 - [x] *Project16: implement sm2 2P decrypt with real network communication<br>
